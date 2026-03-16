@@ -1,5 +1,4 @@
-# 打包产物
-dist/
+﻿# PyInstaller 中间产物
 build/
 *.spec
 __pycache__/
