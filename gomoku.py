@@ -389,8 +389,8 @@ class GomokuApp:
         self.root        = root
         self.game        = GomokuGame()
         self.sound       = SoundManager()
-        self.theme_idx   = 0
-        self.theme       = THEMES[THEME_NAMES[self.theme_idx]]
+        self.theme_name  = THEME_NAMES[0]          # ← 保存主题名称字符串
+        self.theme       = THEMES[self.theme_name]
         self.mode        = "pvp"      # "pvp" | "pva_b" | "pva_w"
         self.ai          = None
         self._hover_pos  = None
@@ -489,7 +489,8 @@ class GomokuApp:
 
     # ── 主题切换 ──────────────────────────────────────
     def _on_theme_change(self, name):
-        self.theme = THEMES[name]
+        self.theme_name = name          # ← 保存名称字符串
+        self.theme      = THEMES[name]
         self._rebuild_ui()
 
     def _rebuild_ui(self):
@@ -498,7 +499,7 @@ class GomokuApp:
         self._apply_theme_root()
         self._build_ui()
         self.mode_var.set(self.mode)
-        self.theme_var.set(THEME_NAMES[list(THEMES.keys()).index(self.theme)])
+        self.theme_var.set(self.theme_name)   # ← 直接用保存的名称
         self._draw_board()
         self._update_status()
 
